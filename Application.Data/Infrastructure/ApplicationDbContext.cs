@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 
 namespace Application.Data.Infrastructure
 {
-    class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext() 
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+
+        public new virtual IDbSet<ApplicationUser> Users { get; set; }
 
         public static ApplicationDbContext Create()
         {

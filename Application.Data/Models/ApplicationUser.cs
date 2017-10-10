@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.Data.Models
 {
-    class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         public ApplicationUser()
         {
