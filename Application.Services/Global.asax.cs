@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Application.Services.Infrastructure.IOCastle;
+using Castle.Windsor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +15,12 @@ namespace Application.Services
     {
         protected void Application_Start()
         {
+            var container = new WindsorContainer();
+            container.Install(new ApplicationCastleInstaller());
+
+            var castleControllerFactory = new CastleControllerFactory(container);
+            ControllerBuilder.Current.SetControllerFactory(castleControllerFactory);
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

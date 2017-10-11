@@ -222,6 +222,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\IOCastle\ApplicationCastleInstaller.cs" />
+    <Compile Include="Infrastructure\IOCastle\CastleControllerFactory.cs" />
     <Compile Include="Models\User\RegisterUserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -278,7 +280,12 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Application.Data\Application.Data.csproj">
+      <Project>{30496b43-d019-44ef-8b5f-96d000c519dc}</Project>
+      <Name>Application.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
