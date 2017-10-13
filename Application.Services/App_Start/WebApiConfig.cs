@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Microsoft.Owin.Security.OAuth;
 
 namespace Application.Services
 {
@@ -9,7 +10,10 @@ namespace Application.Services
     {
         public static void Register(HttpConfiguration config)
         {
-            // Konfiguracja i usługi składnika Web API
+            // Web API configuration and services
+            // Configure Web API to use only bearer token authentication.
+            config.SuppressDefaultHostAuthentication();
+            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
             // Trasy składnika Web API
             config.MapHttpAttributeRoutes();
@@ -19,6 +23,11 @@ namespace Application.Services
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling
+                = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
         }
     }
 }
